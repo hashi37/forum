@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class Topic {
     UUID id;
-    String name;
-
+    String title;
+    String content;
+    User user;
 }

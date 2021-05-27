@@ -12,5 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class Post {
     UUID id;
-    String name;
+    String title;
+    String content;
+    User user;
 }

@@ -43,7 +43,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    private static User mapEntityToUser(final UserEntity entity) {
+    public static User mapEntityToUser(final UserEntity entity) {
         return User.builder()
                 .id(UUID.fromString(entity.getId()))
                 .username(entity.getUsername())
@@ -54,7 +54,7 @@ public class UserService {
                 .build();
     }
 
-    private static UserEntity mapUserToEntity(final UUID id, final User user) {
+    public static UserEntity mapUserToEntity(final UUID id, final User user) {
         return UserEntity.builder()
                 .id(id.toString())
                 .username(user.getUsername())
