@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TopicService {
     private final TopicRepository topicRepository;
+    private final UserService userService;
 
     public List<Topic> getAll() {
         return topicRepository.findAll().stream()
@@ -45,19 +46,19 @@ public class TopicService {
 
     private static Topic mapEntityToTopic(final TopicEntity entity) {
         return Topic.builder()
-                .id(UUID.fromString(entity.getId()))
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .user(UserService.mapEntityToUser(entity.getUserEntity()))
+                .userId(UserService.mapEntityToUser(entity.getUserEntity()).getId())
                 .build();
     }
 
-    private static TopicEntity mapTopicToEntity(final UUID id, final Topic topic) {
+    private TopicEntity mapTopicToEntity(final UUID id, final Topic topic) {
         return TopicEntity.builder()
-                .id(id.toString())
+                .id(id)
                 .title(topic.getTitle())
                 .content(topic.getContent())
-                .userEntity(UserService.mapUserToEntity(topic.getUser().getId(), topic.getUser()))
+                .userEntity(UserService.mapUserToEntity(topic.getUserId(), userService.getById(topic.getUserId()).get()))
                 .build();
     }
 }

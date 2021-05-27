@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TopicEntity {
     @Id
-    private String id;
+    private UUID id;
     private String title;
     private String content;
     @OneToMany(

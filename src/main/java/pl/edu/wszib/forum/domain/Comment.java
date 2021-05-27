@@ -14,5 +14,6 @@ public class Comment {
     UUID id;
     String title;
     String content;
-    User user;
+    UUID userId;
+    UUID postId;
 }

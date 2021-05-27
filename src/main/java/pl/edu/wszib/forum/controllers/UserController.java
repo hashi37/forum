@@ -25,8 +25,10 @@ public class UserController {
         return userService.getById(id);
     }
 
+    //@PostMapping(path = "/add", consumes = "application/json",  produces = "application/json")
     @PostMapping
     public UUID add(@RequestBody final User user) {
+        System.out.println("Adding User="+user);
         return userService.add(user);
     }
 

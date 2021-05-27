@@ -14,5 +14,6 @@ public class Post {
     UUID id;
     String title;
     String content;
-    User user;
+    UUID userId;
+    UUID topicId;
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class CommentEntity {
     @Id
-    private String id;
+    private UUID id;
     private String title;
     private String content;
 

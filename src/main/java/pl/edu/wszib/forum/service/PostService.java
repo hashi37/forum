@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final UserService userService;
+
 
     public List<Post> getAll() {
         return postRepository.findAll().stream()
@@ -45,19 +47,19 @@ public class PostService {
 
     private static Post mapEntityToPost(final PostEntity entity) {
         return Post.builder()
-                .id(UUID.fromString(entity.getId()))
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .user(UserService.mapEntityToUser(entity.getUserEntity()))
+                .userId(UserService.mapEntityToUser(entity.getUserEntity()).getId())
                 .build();
     }
 
-    private static PostEntity mapPostToEntity(final UUID id, final Post post) {
+    private PostEntity mapPostToEntity(final UUID id, final Post post) {
         return PostEntity.builder()
-                .id(id.toString())
+                .id(id)
                 .title(post.getTitle())
                 .content(post.getContent())
-                .userEntity(UserService.mapUserToEntity(post.getUser().getId(), post.getUser()))
+                .userEntity(UserService.mapUserToEntity(post.getUserId(), userService.getById(post.getUserId()).get()))
                 .build();
     }
 

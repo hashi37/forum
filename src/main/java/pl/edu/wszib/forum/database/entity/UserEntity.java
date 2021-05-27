@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserEntity {
     @Id
-    private String id;
+    private UUID id;
     private String username;
     private String password;
     private String email;

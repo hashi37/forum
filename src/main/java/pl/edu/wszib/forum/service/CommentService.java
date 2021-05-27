@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final UserService userService;
 
     public List<Comment> getAll() {
         return commentRepository.findAll().stream()
@@ -45,19 +46,20 @@ public class CommentService {
 
     private static Comment mapEntityToComment(final CommentEntity entity) {
         return Comment.builder()
-                .id(UUID.fromString(entity.getId()))
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .user(UserService.mapEntityToUser(entity.getUserEntity()))
+                .userId(entity.getUserEntity().getId())
+                //.postId(entity.get)
                 .build();
     }
 
-    private static CommentEntity mapCommentToEntity(final UUID id, final Comment comment) {
+    private CommentEntity mapCommentToEntity(final UUID id, final Comment comment) {
         return CommentEntity.builder()
-                .id(id.toString())
+                .id(id)
                 .title(comment.getTitle())
                 .content(comment.getContent())
-                .userEntity(UserService.mapUserToEntity(comment.getUser().getId(), comment.getUser()))
+                .userEntity(UserService.mapUserToEntity(comment.getUserId(), userService.getById(comment.getUserId()).get()))
                 .build();
     }
 

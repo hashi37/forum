@@ -14,5 +14,5 @@ public class Topic {
     UUID id;
     String title;
     String content;
-    User user;
+    UUID userId;
 }

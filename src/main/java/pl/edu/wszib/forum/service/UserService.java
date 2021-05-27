@@ -23,6 +23,9 @@ public class UserService {
     }
 
     public Optional<User> getById(final UUID id) {
+        Optional<UserEntity> entities = userRepository.findById(id);
+        System.out.println(entities);
+
         return userRepository.findById(id)
                 .map(UserService::mapEntityToUser);
     }
@@ -45,7 +48,7 @@ public class UserService {
 
     public static User mapEntityToUser(final UserEntity entity) {
         return User.builder()
-                .id(UUID.fromString(entity.getId()))
+                .id(entity.getId())
                 .username(entity.getUsername())
                 .password(entity.getPassword())
                 .email(entity.getEmail())
@@ -56,7 +59,7 @@ public class UserService {
 
     public static UserEntity mapUserToEntity(final UUID id, final User user) {
         return UserEntity.builder()
-                .id(id.toString())
+                .id(id)
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
