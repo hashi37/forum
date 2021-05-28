@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -24,4 +21,8 @@ public class CommentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity userEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "postentity_id", referencedColumnName = "id")
+    private PostEntity postEntity;
 }

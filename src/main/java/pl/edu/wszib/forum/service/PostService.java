@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
+    private final TopicService topicService;
 
 
     public List<Post> getAll() {
@@ -50,16 +51,22 @@ public class PostService {
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .userId(UserService.mapEntityToUser(entity.getUserEntity()).getId())
+                .userId(entity.getUserEntity().getId())
+                .topicId(entity.getTopicEntity().getId())
                 .build();
     }
 
-    private PostEntity mapPostToEntity(final UUID id, final Post post) {
+    public PostEntity mapPostToEntity(final UUID id, final Post post) {
+        System.out.println("=========================================");
+        System.out.println("!!!DEBUG!!! mapPostToEntity post="+post);
+        System.out.println("=========================================");
+
         return PostEntity.builder()
                 .id(id)
                 .title(post.getTitle())
                 .content(post.getContent())
                 .userEntity(UserService.mapUserToEntity(post.getUserId(), userService.getById(post.getUserId()).get()))
+                .topicEntity(topicService.mapTopicToEntity(post.getTopicId(), topicService.getById(post.getTopicId()).get()))
                 .build();
     }
 

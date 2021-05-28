@@ -53,7 +53,7 @@ public class TopicService {
                 .build();
     }
 
-    private TopicEntity mapTopicToEntity(final UUID id, final Topic topic) {
+    public TopicEntity mapTopicToEntity(final UUID id, final Topic topic) {
         return TopicEntity.builder()
                 .id(id)
                 .title(topic.getTitle())

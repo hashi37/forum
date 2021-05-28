@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final UserService userService;
+    private final PostService postService;
 
     public List<Comment> getAll() {
         return commentRepository.findAll().stream()
@@ -50,7 +51,7 @@ public class CommentService {
                 .title(entity.getTitle())
                 .content(entity.getContent())
                 .userId(entity.getUserEntity().getId())
-                //.postId(entity.get)
+                .postId(entity.getPostEntity().getId())
                 .build();
     }
 
@@ -60,6 +61,7 @@ public class CommentService {
                 .title(comment.getTitle())
                 .content(comment.getContent())
                 .userEntity(UserService.mapUserToEntity(comment.getUserId(), userService.getById(comment.getUserId()).get()))
+                .postEntity(postService.mapPostToEntity(comment.getPostId(), postService.getById(comment.getPostId()).get()))
                 .build();
     }
 

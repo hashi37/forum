@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,12 +19,14 @@ public class PostEntity {
     private UUID id;
     private String title;
     private String content;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<CommentEntity> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity userEntity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "topicentity_id", referencedColumnName = "id")
+    private TopicEntity topicEntity;
+
+    @OneToMany(mappedBy = "postEntity")
+    private Set<CommentEntity> commentEntities;
 }
