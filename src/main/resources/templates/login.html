@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Forum</title>
+
+</head>
+
+<body>
+<p th:if="${loginError}" class="error">Wrong user or password</p>
+
+<form th:action="@{/login}" method="post" class="form-signin">
+    <h3 class="form-signin-heading">Forum</h3>
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" id="username" class="form-control" name="username" autofocus="autofocus" /> <br />
+    <br>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" name="password" /> <br />
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+</form>
+
+</body>
+</html>

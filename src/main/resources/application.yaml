@@ -4,3 +4,11 @@ logging:
     guru.springframework.controllers: DEBUG
     org.hibernate: DEBUG
     org: INFO
+
+spring.thymeleaf.cache: false
+spring.thymeleaf.enabled: true
+spring.thymeleaf.prefix: classpath:/templates/
+spring.thymeleaf.suffix: .html
+spring.application.name: Forum
+
+server.error.path: /error

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Forum</title>
+</head>
+<body>
+
+<h3><span th:text="${appName}"></span></h3>
+
+<div class="container">
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <p><a th:href="@{/index}">Go to main page</a></p>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            Logged user name: <span sec:authentication="name">Best employee!</span>
+            <br>
+            Use roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_MODERATOR, ROLE_ADMIN]</span>
+            <br><br>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+            <br>
+        </div>
+    </footer>
+</div>
+
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
